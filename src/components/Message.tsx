@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
-
-interface Props {}
+import { useEffect, useState, useRef } from "react";
 
 function Message() {
   const [name, setName] = useState("");
-  // The format for the code is JSX: Javascript XML
+  const promptShown = useRef(false);
 
   useEffect(() => {
-    setName(prompt("what is your name") ?? "guest");
+    if (!promptShown.current) {
+      setName(prompt("What is your name (blank for none)") || "guest");
+      promptShown.current = true;
+    }
   }, []);
 
-  if (name) {
-    return <h1>hi {name}</h1>;
-  } else {
-    return <h1>hi _____</h1>;
-  }
+  return <h1>Hi {name}</h1>;
 }
 
 export default Message;
