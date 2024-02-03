@@ -1,14 +1,19 @@
-interface Props {
-  name?: string;
-}
+import { useEffect, useState } from "react";
 
-function Message({ name }: Props) {
+interface Props {}
+
+function Message() {
+  const [name, setName] = useState("");
   // The format for the code is JSX: Javascript XML
+
+  useEffect(() => {
+    setName(prompt("what is your name") ?? "guest");
+  }, []);
 
   if (name) {
     return <h1>hi {name}</h1>;
   } else {
-    return <h1>hi anon</h1>;
+    return <h1>hi _____</h1>;
   }
 }
 

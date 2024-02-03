@@ -55,8 +55,8 @@ function App() {
     <>
       {showingAlert && (
         <Alert onClose={() => setShowingAlert(false)}>
-          The chance you died here at {lastCount} clicks is{" "}
-          {probCalc(lastCount)}%
+          You had a {100 - probCalc(lastCount)}% chance to died here at{" "}
+          {lastCount} clicks
         </Alert>
       )}
       <Message></Message>
