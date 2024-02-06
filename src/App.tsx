@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import Message from "./components/Message";
-import ReactDOM from "react-dom";
-
+import "./app.css";
 function App() {
   const [visible, setVisility] = useState(true);
   const [count, setCount] = useState(0);
@@ -52,27 +51,27 @@ function App() {
   };
 
   return (
-    <>
+    <div className="default">
       {showingAlert && (
         <Alert onClose={() => setShowingAlert(false)}>
-          You had a {100 - probCalc(lastCount)}% chance to died here at{" "}
-          {lastCount} clicks
+          You had a <strong>{(100 - probCalc(lastCount)).toFixed(3)}%</strong>{" "}
+          chance to died here at {lastCount} clicks
         </Alert>
       )}
-      <Message></Message>
+      <span>_______________________________</span>
       <h1>
         You clicked {count} time(s). You have a {count}% chance to reset
       </h1>
-      <div>
+      <div className="buttonStyle">
         <Button color="primary" onClick={handleButtonClick}>
-          Hi i am button
+          THE BUTTON
         </Button>
       </div>
-      <h2>
-        Your highscore is {tempHighScore}, the chance to get to your highscore
-        is {prob}%
+      <h2 className="bottom">
+        Your highscore is <strong>{tempHighScore}</strong>, the chance to get to
+        your highscore is <strong>{prob}%</strong>
       </h2>
-    </>
+    </div>
   );
 }
 

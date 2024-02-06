@@ -40,3 +40,31 @@
 .read-the-docs {
   color: #888;
 }
+
+.default {
+  text-align: center;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  right: 0;
+}
+
+.buttonStyle {
+  position: absolute;
+  top: 50%;
+  left: 50%;;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+}
+
+.button {
+  width: 400px;
+  height: 100px;
+  font-size: 40px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}

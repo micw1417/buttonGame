@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 
 function Message() {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(window.localStorage.getItem("username"));
   const promptShown = useRef(false);
 
   useEffect(() => {
-    if (!promptShown.current) {
-      setName(prompt("What is your name (blank for none)") || "guest");
+    if (name || !promptShown.current) {
+      const tempName = prompt("What is your name (blank for none)" || "Guest");
+      setName(tempName);
+      window.localStorage.setItem("username", tempName ?? "");
       promptShown.current = true;
     }
   }, []);
