@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import Message from "./components/Message";
-import "./app.css";
+import "./App.css";
+
 function App() {
   const [visible, setVisility] = useState(true);
   const [count, setCount] = useState(0);
