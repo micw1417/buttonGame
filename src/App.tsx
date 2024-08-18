@@ -3,8 +3,17 @@ import Alert from "./components/Alert";
 import Button from "./components/Button";
 import React from "react";
 import "./App.css";
+import Leaderboard from "./components/Leaderboard";
+import { getHighscores, getSessionId } from "./service/service";
+import { HighscoreObject } from "./service/service";
+import { postHighscores } from "./service/service";
 
 function App() {
+  const [sessionId, setSessionId] = useState<string>(window.localStorage.getItem("sessionId") ?? "");
+  const [globalHighscores, setGlobalHighscore] = useState<HighscoreObject[]>();
+  const [name, setName]= useState<string>(
+    window.localStorage.getItem("userName") ?? "none"
+  );
   //const [visible, setVisility] = useState(true);
   const [count, setCount] = useState(0);
   const [lastCount, setLastCount] = useState(0);
@@ -32,12 +41,20 @@ function App() {
 
       if (count > tempHighScore) {
         setTempHSLS(count);
+        if (name === "none") {
+          const newName = prompt("You got a highscore! There was no name given. If you wish to have a highscore recorded enter a name to be displayed. If not just leave this empty") ?? "";
+          setName(newName);
+          postHighscores(sessionId, count, newName);
+        } else {
+          postHighscores(sessionId, count, name);
+        }
       }
+      
       setCount(0);
     } else {
       setCount(count + 1);
     }
-  }, [count, tempHighScore, setTempHSLS]);
+  }, [count, tempHighScore, setTempHSLS, name]);
 
   const handleKeyPress = useCallback((e: KeyboardEvent) => {
     console.log(e.key);
@@ -45,6 +62,35 @@ function App() {
       handleButtonClick();
     }
   }, [handleButtonClick])
+
+  useEffect(() => {
+    if (sessionId === "") {
+      const fetchSessionId = async () => {
+        try {
+          const data = await getSessionId();
+          setSessionId(data);
+          window.localStorage.setItem("sessionId", data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      fetchSessionId();
+    }
+  })
+
+  useEffect(() => {
+    const fetchHighscores = async () => {
+      try {
+        const data = await getHighscores();
+        setGlobalHighscore(data);
+      } catch (error) {
+        console.error(error);
+      }
+  };
+
+  fetchHighscores();
+  }, [tempHighScore])
 
   useEffect(() => {
     document.addEventListener("keyup", handleKeyPress);
@@ -81,6 +127,9 @@ function App() {
         <Button color="primary" onClick={handleButtonClick}>
           THE BUTTON
         </Button>
+      </div>
+      <div>
+        <Leaderboard highscores={globalHighscores}>hi</Leaderboard>
       </div>
       <h2 className="bottom">
         Your highscore is <strong>{tempHighScore}</strong>, the chance to get to

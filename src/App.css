@@ -68,3 +68,52 @@
   justify-content: center;
   align-items: center;
 }
+
+/* EPIC CHATGPT CODE*/
+.leaderboard {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px; /* Adjust width as needed */
+  height: 100%;
+  background-color: #f8f9fa;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.leaderboard h2 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+}
+
+.leaderboard ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.leaderboard ul li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  color: #555;
+}
+
+.leaderboard ul li:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+
+.leaderboard ul li .rank {
+  font-weight: bold;
+  color: #000;
+}
+
+.leaderboard ul li:hover {
+  background-color: #e9ecef;
+  cursor: pointer;
+}
