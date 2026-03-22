@@ -1,0 +1,9 @@
+:root {
+  --primary: #4a6bff;
+  --radius: 6px;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  margin: 0;
+}
